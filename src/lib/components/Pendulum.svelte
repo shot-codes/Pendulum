@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { nudge } from "$lib/stores";
   import { T, InteractiveObject } from "@threlte/core";
   import { Vector3 } from "three";
   import { RigidBody, Collider, useSphericalJoint } from "@threlte/rapier";
@@ -16,6 +17,11 @@
     const z = Math.floor(5 + Math.random() * 60);
     $weightBody?.applyImpulse(new Vector3(signX * x, 0, signZ * z), true);
   };
+
+  $: {
+    $nudge;
+    randomImpulse();
+  }
 </script>
 
 <RigidBody type={"fixed"} position={{ y: 12 }} bind:rigidBody={$anchorBody}>
